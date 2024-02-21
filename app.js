@@ -24,18 +24,14 @@ app.use(
 app.use(cors());
 
 const routes = require('./routes/routes');
-const adminRoutes = require('./routes/admin');
 
 app.use('/api', routes);
-app.use('/api/admin', adminRoutes);
 
 
 
 const userController = require('./controllers/userController');
-const adminController = require('./controllers/adminController');
 
 const User = require('./models/user');
-const Admin = require('./models/admin');
 
 
 
