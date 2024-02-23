@@ -95,3 +95,29 @@ exports.getExpertLogin = (req, res, next) => {
           res.status(500).json({ error: error.message });
       }
       };
+// get all experts
+exports.getAllExperts = async (req, res, next) => {
+    try {
+      const experts = await Expert.findAll();
+      res.json({ experts });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+// expert profile
+exports.getExpertProfile = async (req, res) => {
+    try {
+      if (!req.session || !req.session.expert) {
+        return res.status(401).json({ error: 'Unauthorized - Expert not in session' });
+      }
+  
+      const expert = req.session.expert;
+      const expertId = req.params.id || expert.id;
+  
+      res.json({ profile: { id: expertId, role: 'expert' } });
+    } catch (error) {
+      console.error('Error fetching expert profile:', error.message);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  };
+  

@@ -28,7 +28,7 @@ exports.getRegister = (req, res, next) => {
 };
 
 exports.postRegister = async (req, res, next) => {
-  const { userName, userPassword, email, birthday } = req.body;
+  const { userName, userPassword, email } = req.body;
 
   if (!validateStrongPassword(userPassword)) {
     return res.status(400).json({
@@ -55,8 +55,7 @@ exports.postRegister = async (req, res, next) => {
     const user = await User.create({
       userName,
       userPassword: hashedPassword,
-      email,
-      birthday
+      email
     });
 
     res.status(201).json({ message: 'User registered successfully', user });
@@ -100,3 +99,19 @@ exports.postLogout = async (req, res) => {
   });
 };
 
+// profile user
+exports.getProfile = async (req, res) => {
+  try {
+    if (!req.session || !req.session.user) {
+      return res.status(401).json({ error: 'Unauthorized - User not in session' });
+    }
+
+    const user = req.session.user;
+    const userId = req.params.id || user.id;
+
+    res.json({ profile: { id: userId, role: 'user' } });
+  } catch (error) {
+    console.error('Error fetching user profile:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};

@@ -14,5 +14,6 @@ router.post('/login', userController.postLogin);
 router.post('/logout', userController.postLogout);
 // ask
 router.post('/ask', aiChat.Askai);
-
+// profile
+router.get('/profile/:id', userController.getProfile);
 module.exports = router;

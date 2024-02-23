@@ -21,7 +21,7 @@ const Expert = sequelize.define('Expert', {
       },
     },
     expertImage: {
-      type: DataTypes.STRING, // Assuming you store the image path or URL
+      type: DataTypes.STRING, 
       allowNull: true,
     },
     expertExperience: {

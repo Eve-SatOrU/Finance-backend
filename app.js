@@ -43,7 +43,7 @@ const Expert = require('./models/expert');
 
 const PORT = 3001 || process.env.PORT;
 
-sequelize.sync({ force: true})
+sequelize.sync()
 .then(result => {
     app.listen(PORT);
     console.log(" lessss go ?! ");
