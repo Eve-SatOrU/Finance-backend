@@ -8,9 +8,6 @@ const User = sequelize.define('user', {
     allowNull: false,
     unique: true,
   },
-  birthday: {
-    type: DataTypes.DATE,
-  },
   userPassword: {
     type: DataTypes.STRING,
     allowNull: false,
