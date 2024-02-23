@@ -38,11 +38,6 @@ const safetySettings = [
 
 exports.Askai = async (req, res) => {
     const { userMessage } = req.body;
-        if (!req.session || !req.session.user) {
-            return res.status(401).json({ error: 'Unauthorized - User not in session' });
-        }
-    
-
     try {
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
